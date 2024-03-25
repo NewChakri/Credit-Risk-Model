@@ -7,3 +7,4 @@ lightgbm
 xgboost
 catboost
 imbalanced-learn
+streamlit
