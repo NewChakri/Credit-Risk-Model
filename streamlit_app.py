@@ -40,8 +40,8 @@ def main():
     housing = st.sidebar.selectbox('Housing', ['Own', 'Rent', 'Free'])
     saving_acct = st.sidebar.selectbox('Saving accounts', ['Little', 'Moderate', 'Quite rich', 'Rich', 'No information'])
     checking_acct = st.sidebar.selectbox('Checking account', ['Little', 'Moderate', 'Rich', 'No information'])
-    credit_amount = st.sidebar.text_input('Credit amount', '')
-    duration = st.sidebar.text_input('Duration (months)', '')
+    credit_amount = st.sidebar.number_input('Credit amount', min_value=0, step=1)
+    duration = st.sidebar.number_input('Duration (months)', min_value=0, step=1)
     purpose = st.sidebar.selectbox('Purpose', ['Car', 'Radio/TV', 'Education', 'Furniture/Equipment', 'Business', 'Domestic appliances', 'Repairs', 'Vacation/Others'])
 
     # Convert job selection to numeric
@@ -65,22 +65,14 @@ def main():
     input_df = pd.DataFrame(input_data)
 
     if st.sidebar.button('Predict'):
-        # Check if Credit amount and Duration are entered
-        if credit_amount and duration:
-            # Convert Credit amount and Duration to numeric
-            input_df['Credit amount'] = pd.to_numeric(input_df['Credit amount'])
-            input_df['Duration'] = pd.to_numeric(input_df['Duration'])
-            
-            # Get prediction
-            prediction = predict(input_df)
+        # Get prediction
+        prediction = predict(input_df)
 
-            # Display prediction result
-            if prediction[0] == 0:
-                st.error('High Risk')
-            else:
-                st.success('Low Risk')
+        # Display prediction result
+        if prediction[0] == 0:
+            st.error('High Risk')
         else:
-            st.warning('Please enter Credit amount and Duration.')
+            st.success('Low Risk')
 
 if __name__ == '__main__':
     main()
