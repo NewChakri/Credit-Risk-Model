@@ -9,11 +9,10 @@ model = joblib.load('best_model.pkl')
 # Function to preprocess input data
 def preprocess_input(input_data):
     # Convert categorical columns to numerical using LabelEncoder
-    label_encoders = {}
     categorical_cols = ['Sex', 'Housing', 'Saving accounts', 'Checking account', 'Purpose']
     for col in categorical_cols:
-        label_encoders[col] = LabelEncoder()
-        input_data[col] = label_encoders[col].fit_transform(input_data[col])
+        label_encoder = LabelEncoder()
+        input_data[col] = label_encoder.fit_transform(input_data[col])
     
     return input_data
 
