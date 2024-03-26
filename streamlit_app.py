@@ -19,10 +19,6 @@ def preprocess_input(input_data):
 # Function to predict
 def predict(input_data):
     preprocessed_data = preprocess_input(input_data)
-    nan_columns = preprocessed_data.columns[preprocessed_data.isnull().any()]
-    if not nan_columns.empty:
-        st.error(f'Input data contains NaN values in columns: {", ".join(nan_columns)}. Please provide valid input.')
-        return None
     prediction = model.predict(preprocessed_data)
     return prediction
 
@@ -63,16 +59,6 @@ def main():
         'Duration': [duration],
         'Purpose': [purpose]
     }
-    st.write('Data Types of Input Fields:')
-    st.write(f'Age: {type(age).__name__}')
-    st.write(f'Sex: {type(sex).__name__}')
-    st.write(f'Job: {type(job).__name__}')
-    st.write(f'Housing: {type(housing).__name__}')
-    st.write(f'Saving accounts: {type(saving_acct).__name__}')
-    st.write(f'Checking account: {type(checking_acct).__name__}')
-    st.write(f'Credit amount: {type(credit_amount).__name__}')
-    st.write(f'Duration: {type(duration).__name__}')
-    st.write(f'Purpose: {type(purpose).__name__}')
 
     # Convert input data to DataFrame
     input_df = pd.DataFrame(input_data)
