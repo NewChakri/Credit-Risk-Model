@@ -16,11 +16,34 @@ def preprocess_input(input_data):
     
     return input_data
 
-# Function to predict
 def predict(input_data):
-    preprocessed_data = preprocess_input(input_data)
+    # Print or log the preprocessed data before prediction
+    print("Preprocessed Data:")
+    print(input_data)
+
+    preprocessed_data = preprocess_input(input_data, encoding_mappings)
+    nan_columns = preprocessed_data.columns[preprocessed_data.isnull().any()]
+    if not nan_columns.empty:
+        st.error(f'Input data contains NaN values in columns: {", ".join(nan_columns)}. Please provide valid input.')
+        return None
+
+    # Print or log the preprocessed data after preprocessing
+    print("Preprocessed Data After:")
+    print(preprocessed_data)
+
     prediction = model.predict(preprocessed_data)
+
+    # Print or log the prediction
+    print("Prediction:")
+    print(prediction)
+
     return prediction
+
+# Function to predict
+#def predict(input_data):
+#    preprocessed_data = preprocess_input(input_data)
+#    prediction = model.predict(preprocessed_data)
+#    return prediction
 
 # Create the web app interface using Streamlit
 def main():
