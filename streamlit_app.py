@@ -7,19 +7,12 @@ from sklearn.preprocessing import LabelEncoder
 # Load the saved model
 model = joblib.load('best_model.pkl')
 
-# Load the label encoding mappings
-with open('label_encoding_mappings.json', 'r') as file:
-    encoding_mappings = json.load(file)
-
 # Function to preprocess input data
 def preprocess_input(input_data, encoding_mappings):
-    # Convert categorical columns to numerical using LabelEncoder and mapping
-    categorical_cols = ['Sex', 'Housing', 'Saving accounts', 'Checking account', 'Purpose']
-    for col in categorical_cols:
-        input_data[col] = input_data[col].fillna('no_inf')
-        input_data[col] = input_data[col].map(encoding_mappings[col])
-        input_data[col] = pd.to_numeric(input_data[col], errors='coerce')
-        input_data[col] = input_data[col].astype('Int64')  # Convert to Int64 type
+    label_encoders = {}
+    for col in df.select_dtypes(include=['object']).columns:
+        label_encoders[col] = LabelEncoder()
+        df[col] = label_encoders[col].fit_transform(df[col])
     
     return input_data
 
