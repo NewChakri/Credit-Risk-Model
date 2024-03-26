@@ -23,6 +23,10 @@ def preprocess_input(input_data, encoding_mappings):
 # Function to predict
 def predict(input_data):
     preprocessed_data = preprocess_input(input_data, encoding_mappings)
+    nan_columns = preprocessed_data.columns[preprocessed_data.isnull().any()]
+    if not nan_columns.empty:
+        st.error(f'Input data contains NaN values in columns: {", ".join(nan_columns)}. Please provide valid input.')
+        return None
     prediction = model.predict(preprocessed_data)
     return prediction
 
