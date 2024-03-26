@@ -21,7 +21,7 @@ def predict(input_data):
     print("Preprocessed Data:")
     print(input_data)
 
-    preprocessed_data = preprocess_input(input_data, encoding_mappings)
+    preprocessed_data = preprocess_input(input_data)
     nan_columns = preprocessed_data.columns[preprocessed_data.isnull().any()]
     if not nan_columns.empty:
         st.error(f'Input data contains NaN values in columns: {", ".join(nan_columns)}. Please provide valid input.')
