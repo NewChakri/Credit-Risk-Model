@@ -1,27 +1,28 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from sklearn.preprocessing import LabelEncoder
 import json
+from sklearn.preprocessing import LabelEncoder
 
 # Load the saved model
 model = joblib.load('best_model.pkl')
 
-# Load the label encoding mappings from the JSON file
+# Load the label encoding mappings
 with open('label_encoding_mappings.json', 'r') as file:
     encoding_mappings = json.load(file)
 
-# Function to preprocess input data using the mapping
-def preprocess_input(input_data):
-    # Apply label encoding using the mapping
-    for col in encoding_mappings:
+# Function to preprocess input data
+def preprocess_input(input_data, encoding_mappings):
+    # Convert categorical columns to numerical using LabelEncoder and mapping
+    categorical_cols = ['Sex', 'Housing', 'Saving accounts', 'Checking account', 'Purpose']
+    for col in categorical_cols:
         input_data[col] = input_data[col].map(encoding_mappings[col])
     
     return input_data
 
 # Function to predict
 def predict(input_data):
-    preprocessed_data = preprocess_input(input_data)
+    preprocessed_data = preprocess_input(input_data, encoding_mappings)
     prediction = model.predict(preprocessed_data)
     return prediction
 
@@ -65,6 +66,9 @@ def main():
 
     # Convert input data to DataFrame
     input_df = pd.DataFrame(input_data)
+
+    # Add a placeholder 'Risk' column to input_df
+    input_df['Risk'] = 0  # You can set a default value here
 
     if st.sidebar.button('Predict'):
         # Get prediction
