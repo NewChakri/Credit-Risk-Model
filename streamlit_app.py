@@ -67,6 +67,16 @@ def main():
         'Duration': [duration],
         'Purpose': [purpose]
     }
+    st.write('Data Types of Input Fields:')
+    st.write(f'Age: {type(age).__name__}')
+    st.write(f'Sex: {type(sex).__name__}')
+    st.write(f'Job: {type(job).__name__}')
+    st.write(f'Housing: {type(housing).__name__}')
+    st.write(f'Saving accounts: {type(saving_acct).__name__}')
+    st.write(f'Checking account: {type(checking_acct).__name__}')
+    st.write(f'Credit amount: {type(credit_amount).__name__}')
+    st.write(f'Duration: {type(duration).__name__}')
+    st.write(f'Purpose: {type(purpose).__name__}')
 
     # Convert input data to DataFrame
     input_df = pd.DataFrame(input_data)
