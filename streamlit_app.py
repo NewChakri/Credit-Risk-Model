@@ -94,7 +94,7 @@ def main():
     if st.sidebar.button('Predict'):
         # Get prediction
         prediction = predict(input_df)
-
+        st.write('Prediction:', prediction) 
         # Display prediction result
         if prediction[0] == 0:
             st.error('High Risk')
