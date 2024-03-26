@@ -16,39 +16,11 @@ def preprocess_input(input_data):
     
     return input_data
 
-def predict(input_data):
-    # Print or log the preprocessed data before prediction
-    print("Preprocessed Data:")
-    print(input_data)
-
-    preprocessed_data = preprocess_input(input_data)
-    nan_columns = preprocessed_data.columns[preprocessed_data.isnull().any()]
-    if not nan_columns.empty:
-        st.error(f'Input data contains NaN values in columns: {", ".join(nan_columns)}. Please provide valid input.')
-        return None
-
-    # Print or log the preprocessed data after preprocessing
-    print("Preprocessed Data After:")
-    print(preprocessed_data)
-
-    # Make prediction using the trained model
-    prediction = model.predict(preprocessed_data)
-
-    # Print or log the prediction
-    print("Prediction:")
-    print(prediction)
-
-    # Print the predicted class probabilities for debugging
-    print("Predicted Class Probabilities:")
-    print(model.predict_proba(preprocessed_data))
-
-    return prediction
-
 # Function to predict
-#def predict(input_data):
-#    preprocessed_data = preprocess_input(input_data)
-#    prediction = model.predict(preprocessed_data)
-#    return prediction
+def predict(input_data):
+    preprocessed_data = preprocess_input(input_data)
+    prediction = model.predict(preprocessed_data)
+    return prediction
 
 # Create the web app interface using Streamlit
 def main():
@@ -93,6 +65,8 @@ def main():
 
     if st.sidebar.button('Predict'):
         # Get prediction
+        prediction = predict(input_df)
+        st.write("Input Data:", input_df)
         prediction = predict(input_df)
         st.write('Prediction:', prediction) 
         # Display prediction result
