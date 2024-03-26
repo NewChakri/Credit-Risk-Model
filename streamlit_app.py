@@ -10,9 +10,9 @@ model = joblib.load('best_model.pkl')
 # Function to preprocess input data
 def preprocess_input(input_data):
     label_encoders = {}
-    for col in df.select_dtypes(include=['object']).columns:
+    for col in input_data.select_dtypes(include=['object']).columns:
         label_encoders[col] = LabelEncoder()
-        df[col] = label_encoders[col].fit_transform(df[col])
+        input_data[col] = label_encoders[col].fit_transform(input_data[col])
     
     return input_data
 
