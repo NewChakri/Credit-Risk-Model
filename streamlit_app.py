@@ -31,11 +31,16 @@ def predict(input_data):
     print("Preprocessed Data After:")
     print(preprocessed_data)
 
+    # Make prediction using the trained model
     prediction = model.predict(preprocessed_data)
 
     # Print or log the prediction
     print("Prediction:")
     print(prediction)
+
+    # Print the predicted class probabilities for debugging
+    print("Predicted Class Probabilities:")
+    print(model.predict_proba(preprocessed_data))
 
     return prediction
 
