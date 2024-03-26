@@ -2,17 +2,20 @@ import streamlit as st
 import pandas as pd
 import joblib
 from sklearn.preprocessing import LabelEncoder
+import json
 
 # Load the saved model
 model = joblib.load('best_model.pkl')
 
-# Function to preprocess input data
+# Load the label encoding mappings from the JSON file
+with open('label_encoding_mappings.json', 'r') as file:
+    encoding_mappings = json.load(file)
+
+# Function to preprocess input data using the mapping
 def preprocess_input(input_data):
-    # Convert categorical columns to numerical using LabelEncoder
-    categorical_cols = ['Sex', 'Housing', 'Saving accounts', 'Checking account', 'Purpose']
-    for col in categorical_cols:
-        label_encoder = LabelEncoder()
-        input_data[col] = label_encoder.fit_transform(input_data[col])
+    # Apply label encoding using the mapping
+    for col in encoding_mappings:
+        input_data[col] = input_data[col].map(encoding_mappings[col])
     
     return input_data
 
