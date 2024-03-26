@@ -17,6 +17,7 @@ def preprocess_input(input_data, encoding_mappings):
     categorical_cols = ['Sex', 'Housing', 'Saving accounts', 'Checking account', 'Purpose']
     for col in categorical_cols:
         input_data[col] = input_data[col].map(encoding_mappings[col])
+        input_data[col] = input_data[col].astype(int)
     
     return input_data
 
