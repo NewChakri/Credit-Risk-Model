@@ -16,6 +16,7 @@ def preprocess_input(input_data, encoding_mappings):
     # Convert categorical columns to numerical using LabelEncoder and mapping
     categorical_cols = ['Sex', 'Housing', 'Saving accounts', 'Checking account', 'Purpose']
     for col in categorical_cols:
+        input_data[col] = input_data[col].fillna('no_inf')
         input_data[col] = input_data[col].map(encoding_mappings[col])
         input_data[col] = input_data[col].astype(int)
     
