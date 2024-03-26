@@ -67,9 +67,6 @@ def main():
     # Convert input data to DataFrame
     input_df = pd.DataFrame(input_data)
 
-    # Add a placeholder 'Risk' column to input_df
-    input_df['Risk'] = 0  # You can set a default value here
-
     if st.sidebar.button('Predict'):
         # Get prediction
         prediction = predict(input_df)
