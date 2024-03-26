@@ -18,7 +18,8 @@ def preprocess_input(input_data, encoding_mappings):
     for col in categorical_cols:
         input_data[col] = input_data[col].fillna('no_inf')
         input_data[col] = input_data[col].map(encoding_mappings[col])
-        input_data[col] = input_data[col].astype(int)
+        input_data[col] = pd.to_numeric(input_data[col], errors='coerce')
+        input_data[col] = input_data[col].astype('Int64')  # Convert to Int64 type
     
     return input_data
 
