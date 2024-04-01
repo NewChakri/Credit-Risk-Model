@@ -1,7 +1,9 @@
 # Credit Risk Prediction App Explanation
 
 This repository contains code for a credit risk prediction application. The application uses machine learning models to predict whether a customer is at high or low risk of credit default based on their input data.
-![image](https://github.com/NewChakri/Credit-Risk-Model/assets/99199609/0e37c184-2343-4d35-bc60-489d6da1550a)
+
+![image](https://github.com/NewChakri/Credit-Risk-Model/assets/99199609/8d866f05-8139-4784-81c8-96be27a6f9c1)
+
 
 ## Data
 
