@@ -74,12 +74,6 @@ def main():
 
     if st.sidebar.button('Predict'):
         # Get prediction
-        st.write("Input Data:", input_df)  # Debugging output
-        preprocessed_data = preprocess_input(input_df)
-        st.write("Preprocessed Data:", preprocessed_data)  # Debugging output
-        prediction = predict(preprocessed_data)
-        st.write('Prediction:', prediction) 
-        # Display prediction result
         if prediction[0] == 0:
             st.error('High Risk')
         else:
