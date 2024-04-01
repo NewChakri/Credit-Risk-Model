@@ -120,7 +120,7 @@ for name, model in models.items():
                                     'Precision': precision, 'Recall': recall, 'F1-score': f1_score}, ignore_index=True)
     
     # Check if the current model has a higher F1-score and lower training time than the best model
-    if f1_score > best_f1_score and training_time < lowest_training_time:
+    if f1_score > best_f1_score or (f1_score == best_f1_score and training_time < lowest_training_time):
         best_model = model
         best_f1_score = f1_score
         lowest_training_time = training_time
