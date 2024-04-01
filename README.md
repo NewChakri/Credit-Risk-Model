@@ -32,8 +32,8 @@ The second part of the code is a Streamlit web application (`streamlit_app.py`) 
 
 
 ## Files Included
-`german_credit_data.csv` : Dataset used for training and testing.
-`Credit-Risk-Model.py` : Python script containing code for data preprocessing, model training, and evaluation.
-`best_model.pkl` : Saved best-performing machine learning model.
-`streamlit_app.py` : Streamlit web application code for credit risk prediction.
-`model_evaluation_results.csv` : CSV file containing the evaluation results of different models, including accuracy, precision, recall, F1-score, and training time.
+- `german_credit_data.csv` : Dataset used for training and testing.
+- `Credit-Risk-Model.py` : Python script containing code for data preprocessing, model training, and evaluation.
+- `best_model.pkl` : Saved best-performing machine learning model.
+- `streamlit_app.py` : Streamlit web application code for credit risk prediction.
+- `model_evaluation_results.csv` : CSV file containing the evaluation results of different models, including accuracy, precision, recall, F1-score, and training time.
