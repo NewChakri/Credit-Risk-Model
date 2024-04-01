@@ -75,9 +75,9 @@ def main():
     if st.sidebar.button('Predict'):
         # Get prediction
         if prediction[0] == 0:
-            st.error('High Risk')
+            st.error('### High Risk\n😱 This customer is predicted to be at **high risk** of credit default.')
         else:
-            st.success('Low Risk')
+            st.success('### Low Risk\n🎉 This customer is predicted to be at **low risk** of credit default.')
 
 if __name__ == '__main__':
     main()
