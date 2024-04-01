@@ -71,7 +71,7 @@ def main():
 
     # Convert input data to DataFrame
     input_df = pd.DataFrame(input_data)
-
+    prediction = predict(input_df)
     if st.sidebar.button('Predict'):
         # Get prediction
         if prediction[0] == 0:
