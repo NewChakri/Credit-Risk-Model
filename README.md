@@ -1,4 +1,4 @@
-# Credit Risk Prediction App Explanation
+# Credit Risk Prediction
 https://newchakri-credit-risk-model.streamlit.app
 
 This repository contains code for a credit risk prediction application. The application uses machine learning models to predict whether a customer is at high or low risk of credit default based on their input data.
