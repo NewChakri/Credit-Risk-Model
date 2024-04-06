@@ -31,7 +31,7 @@ Next, the code defines hyperparameter grids for various machine learning models,
 
 ### 3. Streamlit Web App
 
-The second part of the code is a Streamlit web application (`streamlit_app.py`) that loads the saved best model and allows users to input customer details. It preprocesses the input data, predicts the credit risk using the loaded model, and displays the prediction result (high or low risk) with appropriate styling and emojis.
+The second part of the code is a Streamlit web application (`streamlit_app.py`) that loads the saved best model and allows users to input customer details. It preprocesses the input data, predicts the credit risk using the loaded model, and displays the prediction result (high or low risk) with appropriate styling.
 
 
 ## Files Included
