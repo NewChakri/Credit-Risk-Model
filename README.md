@@ -1,9 +1,9 @@
 # Credit Risk Prediction
-https://newchakri-credit-risk-model.streamlit.app
-
-This repository contains code for a credit risk prediction application. The application uses machine learning models to predict whether a customer is at high or low risk of credit default based on their input data.
+Web App : https://newchakri-credit-risk-model.streamlit.app
 
 ![image](https://github.com/NewChakri/Credit-Risk-Model/assets/99199609/8d866f05-8139-4784-81c8-96be27a6f9c1)
+
+This project is a credit risk prediction application developed using Python and machine learning classification models. The application's primary objective is to assess whether a customer is at high or low risk of credit default based on their input data. It is deployed using Streamlit, providing a user-friendly and interactive platform for credit risk analysis.
 
 
 ## Data
