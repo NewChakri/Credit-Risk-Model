@@ -13,55 +13,40 @@ from xgboost import XGBClassifier
 from catboost import CatBoostClassifier
 from imblearn.over_sampling import SMOTE
 import time
+import joblib
 
-
+############## Read data ##############
 df = pd.read_csv('german_credit_data.csv')
 
+############## Data Exploration and Visualization ##############
 grouped_data = df.groupby('Risk')
-
-# Define columns to plot
 columns_to_plot = ['Age', 'Sex', 'Job', 'Housing', 'Saving accounts', 'Checking account', 'Credit amount', 'Duration', 'Purpose']
-
-# Set up the figure and axes for plotting
 fig, axes = plt.subplots(nrows=len(columns_to_plot), ncols=1, figsize=(10, 8 * len(columns_to_plot)))
-
-# Iterate over each column and plot grouped data
 for idx, col in enumerate(columns_to_plot):
-    # Plot bar chart for categorical columns and histogram for numerical columns
     if df[col].dtype == 'object':
         sns.countplot(x=col, hue='Risk', data=df, ax=axes[idx])
     else:
         sns.histplot(x=col, hue='Risk', data=df, ax=axes[idx], bins=20)
-    
-    # Set plot title
     axes[idx].set_title(f'{col} by Risk')
-
-# Adjust layout and display plots
 plt.tight_layout()
 plt.show()
 
 
-# Drop unnecessary columns or handle missing values
+############## Data Preprocessing ##############
 df.drop(['Unnamed: 0'], axis=1, inplace=True)
 df['Saving accounts'] = df['Saving accounts'].fillna('no_inf')
 df['Checking account'] = df['Checking account'].fillna('no_inf')
-
-
-# Convert categorical columns to numerical using LabelEncoder
 label_encoders = {}
 for col in df.select_dtypes(include=['object']).columns:
     label_encoders[col] = LabelEncoder()
     df[col] = label_encoders[col].fit_transform(df[col])
 
-# Split data into features and target variable
+
+############## Model Training and Evaluation ##############
 X = df.drop('Risk', axis=1)
 y = df['Risk']
-
-# Apply SMOTE to balance the classes
 smote = SMOTE(random_state=42)
 X_resampled, y_resampled = smote.fit_resample(X, y)
-
-# Split resampled data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.2, random_state=42)
 
 # Define hyperparameter grids for each model
@@ -114,7 +99,6 @@ for name, model in models.items():
     recall = (classification_rep['0']['recall'] + classification_rep['1']['recall']) / 2
     f1_score = (classification_rep['0']['f1-score'] + classification_rep['1']['f1-score']) / 2
     
-    
     # Append results to DataFrame
     results_df = results_df.append({'Model': name, 'Best Parameters': best_params, 'Accuracy': accuracy, 'Training Time': training_time,
                                     'Precision': precision, 'Recall': recall, 'F1-score': f1_score}, ignore_index=True)
@@ -128,7 +112,6 @@ for name, model in models.items():
 
 # Export the best model
 if best_model is not None:
-    import joblib
     joblib.dump(best_model, 'best_model.pkl')
 
 results_df.to_csv('model_evaluation_results.csv', index=False)
