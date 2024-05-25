@@ -31,7 +31,6 @@ for idx, col in enumerate(columns_to_plot):
 plt.tight_layout()
 plt.show()
 
-
 ############## Data Preprocessing ##############
 df.drop(['Unnamed: 0'], axis=1, inplace=True)
 df['Saving accounts'] = df['Saving accounts'].fillna('no_inf')
@@ -40,7 +39,6 @@ label_encoders = {}
 for col in df.select_dtypes(include=['object']).columns:
     label_encoders[col] = LabelEncoder()
     df[col] = label_encoders[col].fit_transform(df[col])
-
 
 ############## Model Training and Evaluation ##############
 X = df.drop('Risk', axis=1)
